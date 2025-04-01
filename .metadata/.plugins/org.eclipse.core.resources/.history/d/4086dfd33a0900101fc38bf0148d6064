@@ -1,0 +1,60 @@
+package swea_asignment;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Swea_14510 {
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int T = Integer.parseInt(br.readLine());
+		
+		for (int tc = 1; tc<= T; tc++) {
+			int N = Integer.parseInt(br.readLine()); //나무의 개수
+			int[] tree = new int[N];
+	
+			int maxHeight = Integer.MIN_VALUE;
+			int result = 0;
+			int oneDay = 0;
+			int twoDay = 0;
+			// 배열에 나무 담고 최대 높이 구함 
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			for (int i = 0; i < N; i++) {
+				tree[i] = Integer.parseInt(st.nextToken());
+				maxHeight = Math.max(maxHeight, tree[i]);
+			}
+			
+			// 성장해야 하는 크기 분석
+            for (int i = 0; i < N; i++) {
+                int diff = maxHeight - tree[i];
+
+                result += (diff / 3) * 2; // 3의 배수는 2일 필요
+                if (diff % 3 == 1) oneDay++;
+                else if (diff % 3 == 2) twoDay++;
+            }
+
+            // oneDay와 twoDay의 균형 조정
+            while (oneDay > twoDay + 1) {
+                oneDay -= 2;
+                twoDay++;
+                result += 2;
+            }
+
+            // 남은 oneDay와 twoDay 처리
+            if (oneDay == twoDay) result += oneDay * 2;
+            else if (oneDay > twoDay) result += oneDay * 2 - 1;
+            else result += twoDay * 2;
+			System.out.println("#"+tc+" "+result);
+			
+			
+			
+			
+			
+			
+		}//end tc
+		
+	}
+
+}

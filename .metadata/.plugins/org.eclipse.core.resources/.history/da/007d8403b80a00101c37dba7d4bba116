@@ -1,0 +1,38 @@
+package swea_asignment;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class swea_3289 {
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		
+		for(int testCase=1; testCase<=T; testCase++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int N = Integer.parseInt(st.nextToken()); // 집합의 개수
+			int M = Integer.parseInt(st.nextToken()); // 연산의 개수
+			
+			int[] p = new int[N+1]; //0은 버림 
+			
+			for (int i = 0; i < N; i++) {
+				
+			}
+			
+			
+			
+			
+			sb.append("#").append(testCase).append(" ").append(" ");
+			
+			
+		}
+		System.out.println(sb.toString());
+		
+		
+		
+	}
+
+}

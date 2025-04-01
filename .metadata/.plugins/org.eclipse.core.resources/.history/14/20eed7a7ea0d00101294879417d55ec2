@@ -1,0 +1,60 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Stack;
+import java.util.StringTokenizer;
+
+public class Algo2_서울_12_정민주 {
+	private static int[][] graph; //그래프 배열
+	private static int N; //전체 사람의 수 N
+	private static int M; //관계의 개수 M
+	public static void main(String[] args) throws Exception { //main 시작
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); //입력을 받기 위함
+		int T = Integer.parseInt(br.readLine()); //테스트케이스 개수
+		for (int testCase = 1; testCase <= T; testCase++) { //테스트케이스만큼 반복
+			int ans = 0; //정답 변수
+			N = Integer.parseInt(br.readLine()); //전체 사람의 수 N (노드라고 생각)
+			M = Integer.parseInt(br.readLine());; //관계의 개수 M (간선이라고 생각)
+			graph = new int[N+1][N+1]; //0번은 안 씀
+			for (int i = 0; i < M; i++) { //M번만큼 입력받음
+				StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+				int X = Integer.parseInt(st.nextToken()); //부모 번호
+				int Y = Integer.parseInt(st.nextToken()); //자식 번호
+				graph[X][Y] = 1; //해당하는 부분 1로 저장
+			}
+			ans = dfs(1); // 최고 조상인 1부터 dfs
+			System.out.println("#" + testCase + " " + ans); //정답 출력
+		} //테스트케이스 끝
+	} //main 끝
+
+	public static int dfs(int p) { //dfs를 위한 함수
+		Stack<Integer> exPlan = new Stack<>(); //실행 계획을 보기 위한 stack 생성
+		boolean[] visited = new boolean[N+1]; //방문 체크
+		int[] countNode = new int[N+1]; //관계 구하기 위해 만든 배열
+		exPlan.add(p); // 시작점
+		while(!exPlan.isEmpty()) { //스택이 비지 않았을 동안
+			int vertex = exPlan.pop(); //현재 값 뽑기
+			if(visited[vertex]) { //이미 방문한 곳이면
+				continue; //넘어감
+			}
+			visited[vertex] = true; //방문체크
+			int[] relation = graph[vertex]; //현재 값과 연관된 값들
+			for (int i = 1; i < relation.length; i++) {
+				if(relation[i] == 1 && !visited[i]) { //만약에 연관관계가 1이고 아직 방문 안했으면
+					exPlan.add(i); //스택에 추가
+					countNode[i] = countNode[vertex] + 1; //count에 추가
+				} //조건문 끝
+			} //for 반복문 끝
+		} //while 반복문 끝
+		Arrays.sort(countNode); //maxCount를 구하기 위해 정렬
+		int maxCount = countNode[countNode.length - 1]; //maxCount를 구함
+		int[] depth = new int[maxCount+1]; //0번은 안 씀, maxCount+1만큼 깊이 배열 생성
+		for (int i = 1; i < countNode.length; i++) {
+			if(countNode[i] != 0) { //만약에 countNode가 0이 아니면 (안 쓰는 부분이니까)
+				depth[countNode[i]]++; //그 깊이에 +1
+			} //조건문 끝
+		} //반복문 끝
+		maxCount = depth[1] - depth[2]; //3촌 관계 쌍의 수 구함
+		return maxCount; //3촌 관계 쌍의 수 리턴
+	} //dfs 함수 끝
+} //class 끝
