@@ -1,0 +1,23 @@
+package aps2;
+import java.util.Scanner;
+
+public class Swea_2112 {
+	static int D,W,K; //두께, 크기,통과기준
+	static int[][] film; //보호필름 저장
+	static int ans; //정답: 최소 투여횟수
+	
+	public static void main(String[] args){
+		
+		Scanner sc  = new Scanner(System.in);
+		int T = sc.nextInt();
+		for(int testCase=1; testCase<=T; testCase++) {
+			
+			
+			
+		}
+		
+		
+		
+	}
+
+}

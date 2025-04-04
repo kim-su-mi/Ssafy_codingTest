@@ -1,0 +1,19 @@
+package aps2;
+import java.util.Scanner;
+
+public class Swea_2112 {
+	public static void main(String[] args){
+		
+		Scanner sc  = new Scanner(System.in);
+		int T = sc.nextInt();
+		for(int testCase=1; testCase<=T; testCase++) {
+			
+			
+			
+		}
+		
+		
+		
+	}
+
+}

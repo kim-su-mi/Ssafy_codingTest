@@ -1,0 +1,9 @@
+package aps2;
+
+public class Swea_1949 {
+	static int N,K,maxH,ans; //N*N , K:최대 공사 가능 깊이, maxH:최대 높은 봉우리
+	public static void main(String[] args) {
+		
+	}
+
+}

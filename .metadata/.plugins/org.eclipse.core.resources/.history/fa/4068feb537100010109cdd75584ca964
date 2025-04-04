@@ -1,0 +1,46 @@
+package swea_asignment;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+/**
+ * 동적 계획법
+ * 거스름돈이 1원일떄~~~~주어진 값일때까지의 필요한 동전의 수를 셈 
+ */
+public class Swea_1970_2 {
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		
+		int[] changes = {50000,10000,5000,1000,500,100,50,10};
+		
+		for (int i = changes.length-1; i >=0; i++) {
+			
+		}
+		for(int testCase=1; testCase<=T; testCase++) {
+			
+			int[] result = new int[8]; // 동전이 몇개씩 필요한지 담을 배열
+			
+			int change = Integer.parseInt(br.readLine()); //거스름돈 
+			int[] dp = new int[change+1];
+			
+			for (int i = 1; i <= change; i++) {
+				int minCnt= Integer.MAX_VALUE;
+				
+				//10원 고려 
+			}
+			
+			
+			
+			sb.append("#").append(testCase).append("\n");
+			
+			sb.append("\n");
+			
+		}
+		
+		System.out.println(sb.toString());
+	}
+
+}

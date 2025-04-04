@@ -1,0 +1,36 @@
+package swea_asignment;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class swea_1263 {
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		
+		for(int testCase=1; testCase<=T; testCase++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int N = Integer.parseInt(st.nextToken()); //사람 수, 인접 행렬 크기
+			
+			int[][] adj = new int[N+1][N+1]; //0번은 버릴거임
+			for (int i = 1; i <= N; i++) {
+				for (int j = 1; j <=N; j++) {
+					
+				}
+			}
+			
+			
+			sb.append("#").append(testCase).append(" ").append(" ").append("\n");
+			
+			
+		}
+		System.out.println(sb.toString());
+		
+		
+		
+	}
+
+}
