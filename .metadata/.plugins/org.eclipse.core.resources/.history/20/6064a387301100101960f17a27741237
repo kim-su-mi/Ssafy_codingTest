@@ -40,12 +40,12 @@ public class Swea_1486 {
 				
 				if(totalHeight >= B) {
 					int diff = totalHeight-B;
-					minDiff = Math.min(minDiff, diff);
+					minDiff = Math.min(minDiff, diff)
 				}
 			}
 			
 		
-			sb.append("#").append(testCase).append(" ").append(minDiff).append("\n");
+			sb.append("#").append(testCase).append(" ").append(totalHeight-B).append("\n");
 			
 			
 		}

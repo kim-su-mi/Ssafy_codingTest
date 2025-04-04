@@ -45,7 +45,7 @@ public class Swea_1486 {
 			}
 			
 		
-			sb.append("#").append(testCase).append(" ").append(minDiff).append("\n");
+			sb.append("#").append(testCase).append(" ").append(totalHeight-B).append("\n");
 			
 			
 		}
