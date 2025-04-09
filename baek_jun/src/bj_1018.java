@@ -1,73 +1,112 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class bj_1018 {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-
-		int t = scanner.nextInt();
-
-		for (int tc = 0; tc < t; tc++) {
-
-			// 입력 받기
-			int N = scanner.nextInt();
-			int[] numbers = new int[N];
-
-			for (int i = 0; i < N; i++) {
-				numbers[i] = scanner.nextInt();
-			}
-
-			int K = scanner.nextInt();
-
-			// 부분집합의 합이 K가 되는지 확인
-			boolean result = false;
-			List<Integer> subset = new ArrayList<>();
-
-			// 완전 탐색으로 모든 부분집합 확인
-			for (int i = 1; i < (1 << N); i++) { // 공집합 제외 (1부터 시작)
-				int sum = 0;
-				List<Integer> currentSubset = new ArrayList<>();
-
-				// i의 이진 표현에서 1인 비트 위치의 원소를 선택
-				for (int j = 0; j < N; j++) {
-					if ((i & (1 << j)) > 0) {
-						sum += numbers[j];
-						currentSubset.add(numbers[j]);
-					}
-				}
-
-				// 합이 K와 같은지 확인
-				if (sum == K) {
-					result = true;
-					subset = currentSubset;
-					break;
-				}
-			}
-
-			// 결과 출력
-			if (result) {
-				System.out.println("YES");
-				System.out.println(subset);
-			} else {
-				System.out.println("NO");
+	private static char[][] map;
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		////////////////////////////////////////////////////
+//		// 원하는 테스트 케이스 선택
+//        String input = input1; // input1, input2, input3 중 선택
+//        
+//        // String을 InputStream으로 변환
+//        InputStream is = new ByteArrayInputStream(input.getBytes());
+//        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		//////////////////////////////////////////////////////////////////////
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		
+		map = new char[N][];
+		
+		for (int i = 0; i < N; i++) {
+			String str = br.readLine();
+			map[i] = str.toCharArray();
+		}
+		
+		// 현재 위치에서 8개씩 봄
+		// 만약에 같은게 2번 연속 나오면 그 뒤부터 다시 8*8탐색
+		// 현재 위치가 N-현재 위치가 M-현재위치가 8보다 작으면 넘김, or 탐색 범위를 여기로 한정 
+		int min = Integer.MAX_VALUE;
+		for (int i = 0; i <= N-8; i++) {
+			for (int j = 0; j <= M-8; j++) {
+				int cnt = check(i,j);
+				min = Math.min(cnt, min);
 			}
 		}
-
-		scanner.close();
+		
+		System.out.println(min);
+		
+		
 	}
+	private static int check(int r, int c) {
+		int cnt1 = 0;
+		int cnt2 = 0;
+		String wStart = "WBWBWBWB";
+		String bStart = "BWBWBWBW";
+			for (int i = 0; i < 8; i++) { //행
+				for (int j = 0; j < 8; j++) {//열
+					
+					if(i%2 !=0) {
+						if(map[r+i][c+j] != bStart.charAt(j)) cnt1++;
+					}else {
+						if(map[r+i][c+j] != wStart.charAt(j)) cnt1++;
+					}
+				}
+			}
+			for (int i = 0; i < 8; i++) { //행
+				for (int j = 0; j < 8; j++) {//열
+					
+					if(i%2 !=0) {
+						if(map[r+i][c+j] != wStart.charAt(j)) cnt2++;
+					}else {
+						if(map[r+i][c+j] != bStart.charAt(j)) cnt2++;
+					}
+				}
+			}
+		return Math.min(cnt1, cnt2);
+		
+	}
+	static String input1 = "8 8\r\n"
+			+ "WBWBWBWB\r\n"
+			+ "BWBWBWBW\r\n"
+			+ "WBWBWBWB\r\n"
+			+ "BWBBBWBW\r\n"
+			+ "WBWBWBWB\r\n"
+			+ "BWBWBWBW\r\n"
+			+ "WBWBWBWB\r\n"
+			+ "BWBWBWBW";
+	
+	static String input2 = "10 13\r\n"
+			+ "BBBBBBBBWBWBW\r\n"
+			+ "BBBBBBBBBWBWB\r\n"
+			+ "BBBBBBBBWBWBW\r\n"
+			+ "BBBBBBBBBWBWB\r\n"
+			+ "BBBBBBBBWBWBW\r\n"
+			+ "BBBBBBBBBWBWB\r\n"
+			+ "BBBBBBBBWBWBW\r\n"
+			+ "BBBBBBBBBWBWB\r\n"
+			+ "WWWWWWWWWWBWB\r\n"
+			+ "WWWWWWWWWWBWB\r\n"
+			+ "";
+	static String input3 = "9 23\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBB\r\n"
+			+ "BBBBBBBBBBBBBBBBBBBBBBW";
+	
 
 }
 
 
-//3
-//6 
-//3 34 4 12 5 2 
-//9
-//5 
-//7 3 2 5 8 
-//14
-//5 
-//1 2 3 4 5 
-//20
 
